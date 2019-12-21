@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-const AuthorModel = require("./models/author");
-const BookModel = require("./models/book");
+const BrandModel = require("./models/brand");
+const ItemModel = require("./models/item");
 const {
   DATABASE_NAME,
   USERNAME,
@@ -18,14 +18,14 @@ const sequelize = new Sequelize(DATABASE_NAME, USERNAME, PASSWORD, {
     idle: 10000
   }
 });
-const Book = BookModel(sequelize, Sequelize);
-const Author = AuthorModel(sequelize, Sequelize);
-// Author has Many to book
-Author.hasMany(Book);
-sequelize.sync({ force: false }).then(() => {
-  console.log(`Database & tables created here!`);
-});
+const Item = ItemModel(sequelize, Sequelize);
+const Brand = BrandModel(sequelize, Sequelize);
+// Brand has Many to Item
+// Brand.hasMany(Item);
+// sequelize.sync({ force: false }).then(() => {
+//   console.log(`Database & tables created here!`);
+// });
 module.exports = {
-  Author,
-  Book
+  Brand,
+  Item
 };

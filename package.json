@@ -1,7 +1,6 @@
 {
-  "name": "y",
+  "name": "csc2020-api",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node start.js",
@@ -14,5 +13,15 @@
     "express": "^4.17.1",
     "mysql2": "^2.0.2",
     "sequelize": "^5.21.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almack131216/api-csc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/almack131216/api-csc/issues"
+  },
+  "homepage": "https://github.com/almack131216/api-csc#readme",
+  "description": ""
 }

@@ -9,8 +9,14 @@ module.exports = (sequelize, type) => {
       },
       name: type.STRING,
       category: type.INTEGER,
-      subcategory: type.INTEGER,
-      detail_1: type.INTEGER,
+      brand: {
+        field: "subcategory",
+        type: type.INTEGER
+      },
+      year: {
+        field: "detail_1",
+        type: type.INTEGER
+      },
       price: type.INTEGER,
       createdAt: {
         field: "upload_date",
@@ -20,9 +26,9 @@ module.exports = (sequelize, type) => {
         field: "upload_date",
         type: Date
       },
-      catalogueSubcatId: {
-        field: "subcategory",
-        type: type.INTEGER
+      image: {
+        field: "image_large",
+        type: type.STRING
       }
     },
     {

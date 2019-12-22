@@ -7,7 +7,10 @@ module.exports = (sequelize, type) => {
         primaryKey: true,
         autoIncrement: true
       },
-      subcategory: type.STRING
+      brand: {
+        field: "subcategory",
+        type: type.STRING
+      }
     },
     {
       timestamps: false

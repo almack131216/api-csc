@@ -1,14 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Brand, Item } = require("./sequelize");
+const sitePort = 3000;
 
 // INIT APP
 const app = express();
 app.use(bodyParser.json());
 // restrict access to APIs
 let allowCrossDomain = function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
-  res.header("Access-Control-Allow-Headers", "http://localhost:3001");
+  res.header("Access-Control-Allow-Origin", `http://localhost:${sitePort}`);
+  res.header("Access-Control-Allow-Headers", `http://localhost:${sitePort}`);
   next();
 };
 app.use(allowCrossDomain);
@@ -35,7 +36,13 @@ const qCat = {
 app.get("/api/items/for-sale", (req, res) => {
   Item.findAll({
     where: { category: qCat.cars, status: qStatus.forSale },
-    order: [["createdAt", "DESC"]]
+    order: [["createdAt", "DESC"]],
+    include: [
+      {
+        model: Brand,
+        required: true
+      }
+    ]
   }).then(items => res.json(items));
   //SELECT items.id,items.name,items.detail_1 AS year,items.upload_date AS image,brands.subcategory AS brandName FROM catalogue AS items LEFT JOIN catalogue_subcats AS brands ON items.subcategory=brands.id WHERE items.category=2 AND items.status=1 ORDER BY items.upload_date DESC
 });

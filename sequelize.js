@@ -20,6 +20,12 @@ const sequelize = new Sequelize(DATABASE_NAME, USERNAME, PASSWORD, {
 });
 const Item = ItemModel(sequelize, Sequelize);
 const Brand = BrandModel(sequelize, Sequelize);
+
+Brand.hasMany(Item, { foreignKey: "id" });
+Item.belongsTo(Brand, { foreignKey: "brand" });
+
+// Post.find({ where: { ...}, include: [User]})
+
 // Brand has Many to Item
 // Brand.hasMany(Item);
 // sequelize.sync({ force: false }).then(() => {

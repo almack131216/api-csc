@@ -9,6 +9,7 @@ module.exports = (sequelize, type) => {
       },
       status: type.INTEGER,
       name: type.STRING,
+      slug: type.STRING,
       category: type.INTEGER,
       brand: {
         field: "subcategory",
@@ -19,6 +20,7 @@ module.exports = (sequelize, type) => {
         type: type.INTEGER
       },
       price: type.INTEGER,
+      price_details: type.STRING,
       createdAt: {
         field: "upload_date",
         type: Date

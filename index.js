@@ -13,9 +13,12 @@ const sitePort = 3000;
 const app = express();
 app.use(bodyParser.json());
 // restrict access to APIs
+
+let ALLOWED_DOMAIN = `http://localhost:${sitePort}`;
+
 let allowCrossDomain = function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", `http://localhost:${sitePort}`);
-  res.header("Access-Control-Allow-Headers", `http://localhost:${sitePort}`);
+  res.header("Access-Control-Allow-Origin", `${ALLOWED_DOMAIN}`);
+  res.header("Access-Control-Allow-Headers", `${ALLOWED_DOMAIN}`);
   next();
 };
 app.use(allowCrossDomain);
@@ -71,7 +74,7 @@ app.get("/api/items/sold", (req, res) => {
   ItemSold.findAll({
     where: { id_xtra: 0, category: qCat.cars, status: qStatus.sold },
     order: [["createdAt", "DESC"]],
-    limit: 9,
+    limit: 300,
     include: [
       {
         model: Brand,
@@ -133,7 +136,7 @@ app.get("/api/items/for-sale/:brand", (req, res) => {
 });
 // get items SOLD by BRAND
 app.get("/api/items/sold/:brand", (req, res) => {
-  Item.findAll({
+  ItemSold.findAll({
     where: {
       category: qCat.cars,
       subcategory: req.params.brand,

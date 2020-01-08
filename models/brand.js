@@ -10,6 +10,9 @@ module.exports = (sequelize, type) => {
       brand: {
         field: "subcategory",
         type: type.STRING
+      },
+      slug: {
+        type: type.STRING
       }
     },
     {

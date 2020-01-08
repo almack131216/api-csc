@@ -30,8 +30,9 @@ const qStatus = {
 };
 const qCat = {
   cars: 2,
-  news: 5,
-  testimonials: 3
+  testimonials: 3,
+  press: 4,
+  news: 5
 };
 
 ///////////////////////////////////////// GET ITEMS
@@ -157,6 +158,21 @@ app.get("/api/brand/:id", (req, res) => {
   Brand.findOne({
     where: { id: req.params.id }
   }).then(brand => res.json(brand));
+});
+
+// PRESS
+app.get("/api/items/press", (req, res) => {
+  Item.findAll({
+    where: { id_xtra: 0, category: qCat.press, status: qStatus.forSale },
+    order: [["createdAt", "DESC"]],
+    include: [
+      {
+        model: Brand,
+        required: true
+      }
+    ]
+  }).then(items => res.json(items));
+  //SELECT items.id,items.name,items.detail_1 AS year,items.upload_date AS image,brands.subcategory AS brandName FROM catalogue AS items LEFT JOIN catalogue_subcats AS brands ON items.subcategory=brands.id WHERE items.category=2 AND items.status=1 ORDER BY items.upload_date DESC
 });
 
 // Create a Brand
